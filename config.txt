@@ -1,0 +1,17 @@
+StartTime=2020-1-1
+EndTime=2021-1-1
+Blank=7
+Mode=week
+MaxPage=5
+OutputMode=hight
+OutputDir=D:\picCollect\test
+API=Pixiv
+FilterMode=CN
+CNFilter=正太,漫画,manga,作画过程,R-18,男孩子,乳环,父乳,メイキング,作画,动图,精灵宝可梦,宣传,四格漫画,马里奥,画法,sex education,性教育,4コマ,photoshop,讲座
+JPFilter=
+OutputListAll=false
+OutputFilter=false
+OutputRes=true
+Proxy=https://blue-dawn-a7a7.orisland.workers.dev/
+Setu=3
+Thread=10
