@@ -1,22 +1,25 @@
 package catchSetu;
 
+import ThreadFactory.ThreadData;
+import ThreadFactory.ThreadStart;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import tool.Stander;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
-import static catchSetu.downloads.ThreadNum;
-import static catchSetu.fileDir.Filexists;
-import static catchSetu.catchPic.P_rank;
-import static catchSetu.downloads.PATH;
-import static catchSetu.catchPic.BLANK;
-import static catchSetu.catchPic.OutputMode;
-import static catchSetu.catchPic.*;
+import static ThreadFactory.ThreadStart.DownloadFactory;
+import static ThreadFactory.ThreadStart.FindPicFactory;
+import static catchSetu.config.*;
+import static tool.fileDir.Filexists;
 import static catchSetu.outputjs.charOutStream;
 
 public class Factory {
     static boolean OutputRes = true;
+    public static CountDownLatch LOCK = null;
+    public static ThreadData DATA = null;
 
     public static void shouye(){
         System.out.println("=======================================");
@@ -27,12 +30,20 @@ public class Factory {
     }
 
     public static void Configuration(JSONObject js) throws InterruptedException {
-        PATH = js.getString("OutputDir");
+        OutputDir = js.getString("OutputDir");
         BLANK = Integer.parseInt(js.getString("Blank"));
         OutputMode = js.getString("OutputMode");
-        OutputRes = Boolean.getBoolean(js.getString("OutputRes"));
+        OutputRes = Boolean.parseBoolean(js.getString("OutputRes"));
         MODE = js.getString("Mode");
         ThreadNum = Integer.parseInt(js.getString("Thread"));
+        URLThread = Integer.parseInt(js.getString("URLThread"));
+        StartTime = js.getString("StartTime");
+        EndTime = js.getString("EndTime");
+        MaxPage = Integer.parseInt(js.getString("MaxPage"));
+        API = js.getString("API");
+        CNFilter = js.getString("CNFilter");
+        JPFilter = js.getString("JPFilter");
+        Setu = Integer.parseInt(js.getString("Setu"));
         //API暂时不可选。
         System.out.println("=====================================配置已应用完成!");
     }
@@ -50,14 +61,16 @@ public class Factory {
         if (scanner.nextLine().toUpperCase().equals("Y")){
             System.out.println("正在配置...");
             Configuration(js);
-            System.out.println(P_rank(js));
-            System.out.println(repack(tj));
-            System.out.println("OUTPUTRES:"+OutputRes);
+//            System.out.println(P_rank(js));
+            FindPicFactory();
+            System.out.println("正在等待资料获取进程结束...");
+            LOCK.await();   //上锁
+            JSONArray rs = DATA.getRs();
+            System.out.println(Stander.repack(rs));
             if (OutputRes){
-                charOutStream(repack(tj));
+                charOutStream(Stander.repack(rs));
             }
-            downloads downloads = new downloads();
-            downloads.DownloadFactory(tj);
+            DownloadFactory(rs);
         }else {
             System.out.println("结束！");
         }
