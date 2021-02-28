@@ -164,8 +164,21 @@ public class ThreadWork {
                             }catch (Exception e){
                                 e.printStackTrace();
                                 logger.debug("即将重启，API访问失败结果:"+jsrs);
+                                System.out.println("已设置延迟:8秒");
+                                try {
+                                    Thread.sleep(8000);
+                                } catch (InterruptedException ex) {
+                                    ex.printStackTrace();
+                                }
                                 flag++;
                             }
+                        }
+                        //设置访问延迟
+                        try {
+                            System.out.println("延迟1秒！");
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
