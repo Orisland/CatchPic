@@ -1,6 +1,8 @@
 package catchSetu;
 
 import java.io.*;
+
+import static catchSetu.config.Outfile;
 import static catchSetu.config.OutputDir;
 
 public class outputjs {
@@ -15,7 +17,7 @@ public class outputjs {
     }
     public static void charOutStream(String string) throws Exception{
         // 1：利用File类找到要操作的对象
-        File file = new File(OutputDir+"\\test.js");
+        File file = new File(OutputDir+"\\"+Outfile);
         if(!file.getParentFile().exists()){
             file.getParentFile().mkdirs();
         }

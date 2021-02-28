@@ -21,4 +21,5 @@ public class config {
     public static int Setu = 3;
     public static int ThreadNum = 10;
     public static int URLThread = 2;
+    public static String Outfile = "test.js";
 }

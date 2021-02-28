@@ -18,7 +18,7 @@ public class fileDir {
             try {
                 fileOutputStream = new FileOutputStream(file);
                 String string = "StartTime=2020-1-1\n" +
-                        "EndTime=2020-3-1\n" +
+                        "EndTime=2020-2-1\n" +
                         "Blank=7\n" +
                         "Mode=week\n" +
                         "MaxPage=5\n" +
@@ -34,7 +34,8 @@ public class fileDir {
                         "Proxy=https://blue-dawn-a7a7.orisland.workers.dev/\n" +
                         "Setu=3\n" +
                         "Thread=3\n" +
-                        "URLThread=2";
+                        "URLThread=1\n" +
+                        "Outfile=catalog.js";
                 byte[] buff = string.getBytes();
                 fileOutputStream.write(buff);
             }catch (Exception e){

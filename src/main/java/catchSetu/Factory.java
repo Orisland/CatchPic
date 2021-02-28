@@ -44,6 +44,7 @@ public class Factory {
         CNFilter = js.getString("CNFilter");
         JPFilter = js.getString("JPFilter");
         Setu = Integer.parseInt(js.getString("Setu"));
+        Outfile = js.getString("Outfile");
         //API暂时不可选。
         System.out.println("=====================================配置已应用完成!");
     }
@@ -71,6 +72,9 @@ public class Factory {
                 charOutStream(Stander.repack(rs));
             }
             DownloadFactory(rs);
+            LOCK.await();       //上锁
+            System.out.println("感谢宁的使用哦！请注意身体健康！");
+            System.out.println("感谢宁的使用哦！请注意身体健康！");
         }else {
             System.out.println("结束！");
         }

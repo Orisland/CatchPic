@@ -46,6 +46,7 @@ public class ThreadStart {
          //线程池
          ExecutorService service = Executors.newFixedThreadPool(object.getInteger("ThreadNumP"));
 
+        LOCK = new CountDownLatch(object.getInteger("ThreadNumP"));   //上锁
         for (int i=0; i<object.getInteger("ThreadNumP"); i++){
             service.execute(new ThreadWork.download(tempJson.getJSONObject(i)));
         }

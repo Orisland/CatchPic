@@ -52,6 +52,7 @@ public class ThreadWork {
                 }
             }
             logger.info(currentThread().getName()+":任务结束！=======================================================任务长度"+pic.size());
+            LOCK.countDown();
         }
     }
 
