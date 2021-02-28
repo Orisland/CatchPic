@@ -79,6 +79,7 @@ public class ThreadStart {
         ExecutorService service = Executors.newFixedThreadPool(temp.getInteger("ThreadNumP"));
         LOCK = new CountDownLatch(temp.getInteger("ThreadNumP"));   //上锁
         DATA = new ThreadData();
+        System.out.println("启动API信息查询模块...");
         for (int i=0; i<temp.getInteger("ThreadNumP"); i++){
             service.execute(new ThreadWork.FindPic(tempdata));
         }

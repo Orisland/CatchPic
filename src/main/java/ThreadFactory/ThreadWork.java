@@ -40,7 +40,7 @@ public class ThreadWork {
         public void run() {
             for (Map.Entry<String, Object> entry : pic.entrySet()) {
                 long startTime = System.currentTimeMillis();
-                System.out.println(entry.getValue().toString()+":"+entry.getKey());
+                System.out.println(entry.getKey()+":"+entry.getValue().toString());
                 downLoadFromUrl(entry.getValue().toString(),entry.getKey()+".jpg",OutputDir);
                 long endTime = System.currentTimeMillis();
                 double time = (endTime - startTime) / 1000;

@@ -24,6 +24,7 @@ public class Factory {
     public static void shouye(){
         System.out.println("=======================================");
         System.out.println("            P站周榜下载");
+        System.out.println("            By Orisland");
         System.out.println("");
         System.out.println("");
         System.out.println("=======================================");
@@ -58,6 +59,9 @@ public class Factory {
         for (Map.Entry<String, Object> entry : js.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
         }
+        System.out.println("\n");
+        System.out.println("如需修改请退出bat，并在同级目录中寻找config.txt文件打开修改...");
+        System.out.println("闪退或恢复默认设置请删除config.txt");
         System.out.println("是否执行此配置？Y/N");
         if (scanner.nextLine().toUpperCase().equals("Y")){
             System.out.println("正在配置...");
@@ -67,14 +71,28 @@ public class Factory {
             System.out.println("正在等待资料获取进程结束...");
             LOCK.await();   //上锁
             JSONArray rs = DATA.getRs();
+            System.out.println("==================");
+            System.out.println("信息查询模块执行结束！");
+            System.out.println("==================");
+            System.out.println("\n");
+            System.out.println("==================");
+            System.out.println("下载模块即将在3秒后启动!");
+            System.out.println("任务长度:"+rs.size());
+            System.out.println("==================");
+            Thread.sleep(3000);
             System.out.println(Stander.repack(rs));
             if (OutputRes){
                 charOutStream(Stander.repack(rs));
             }
             DownloadFactory(rs);
             LOCK.await();       //上锁
+            System.out.println("任务长度:"+rs.size());
+            System.out.println("已全部下载完毕~~");
+            System.out.println("\n");
             System.out.println("感谢宁的使用哦！请注意身体健康！");
             System.out.println("感谢宁的使用哦！请注意身体健康！");
+            Runtime run = Runtime.getRuntime();
+            run.exec("cmd.exe /c " + "start "+OutputDir);
         }else {
             System.out.println("结束！");
         }
