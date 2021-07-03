@@ -107,7 +107,7 @@ public class ThreadWork {
                                 logger.error("检查网络设置是否正常!");
                             }
                             try {
-                                jsrs = JSONObject.parseObject(HttpUtil.Get("https://orislandapi.herokuapp.com/api/pixiv/rank?page="+g+"&date="+str+"&mode="+MODE,""));
+                                jsrs = JSONObject.parseObject(HttpUtil.Get("http://orislandapi.herokuapp.com/api/pixiv/rank?page="+g+"&date="+str+"&mode="+MODE,""));
                                 logger.info(currentThread().getName()+"=============API已获取相关数据！page:"+g+",date:"+str+"=============");
                                 illlist = jsrs.getJSONArray("illusts");
                                 for (int t=0; t<illlist.size(); t++){
